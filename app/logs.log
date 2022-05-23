@@ -1,0 +1,126 @@
+2022-05-22 17:00:59,048:INFO:Initializing load_model()
+2022-05-22 17:00:59,048:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:22:36,238:INFO:Initializing load_model()
+2022-05-22 18:22:36,238:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:41:15,664:INFO:Initializing load_model()
+2022-05-22 18:41:15,665:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:46:53,931:INFO:Initializing load_model()
+2022-05-22 18:46:53,932:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:47:06,137:INFO:Initializing load_model()
+2022-05-22 18:47:06,138:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:47:09,974:INFO:Initializing load_model()
+2022-05-22 18:47:09,975:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:47:12,652:INFO:Initializing load_model()
+2022-05-22 18:47:12,653:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:47:12,855:INFO:Initializing load_model()
+2022-05-22 18:47:12,855:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:47:13,006:INFO:Initializing predict_model()
+2022-05-22 18:47:13,007:INFO:predict_model(estimator=Pipeline(steps=[('dtypes',
+                 DataTypes_Auto_infer(ml_usecase='classification',
+                                      numerical_features=['yearsAtCompany'],
+                                      target='turnover')),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='not_available',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None,
+                                numeric_strategy='mean',
+                                target_variable=None)),
+                ('new_levels1',
+                 New_Catagorical_Levels_in_TestData(rep...
+                ('rem_outliers', 'passthrough'), ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='turnover')),
+                ('fix_perfect', Remove_100(target='turnover')),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough'),
+                ['trained_model',
+                 GradientBoostingClassifier(random_state=2768)]]), probability_threshold=None, encoded_labels=False, drift_report=False, raw_score=False, round=4, verbose=True, ml_usecase=MLUsecase.CLASSIFICATION, display=None, drift_kwargs=None)
+2022-05-22 18:47:13,010:INFO:Checking exceptions
+2022-05-22 18:47:13,011:INFO:Preloading libraries
+2022-05-22 18:51:10,023:INFO:Initializing load_model()
+2022-05-22 18:51:10,024:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:51:12,774:INFO:Initializing load_model()
+2022-05-22 18:51:12,775:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:51:16,854:INFO:Initializing load_model()
+2022-05-22 18:51:16,855:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:51:16,961:INFO:Initializing predict_model()
+2022-05-22 18:51:16,962:INFO:predict_model(estimator=Pipeline(steps=[('dtypes',
+                 DataTypes_Auto_infer(ml_usecase='classification',
+                                      numerical_features=['yearsAtCompany'],
+                                      target='turnover')),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='not_available',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None,
+                                numeric_strategy='mean',
+                                target_variable=None)),
+                ('new_levels1',
+                 New_Catagorical_Levels_in_TestData(rep...
+                ('rem_outliers', 'passthrough'), ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='turnover')),
+                ('fix_perfect', Remove_100(target='turnover')),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough'),
+                ['trained_model',
+                 GradientBoostingClassifier(random_state=2768)]]), probability_threshold=None, encoded_labels=False, drift_report=False, raw_score=False, round=4, verbose=True, ml_usecase=MLUsecase.CLASSIFICATION, display=None, drift_kwargs=None)
+2022-05-22 18:51:16,962:INFO:Checking exceptions
+2022-05-22 18:51:16,962:INFO:Preloading libraries
+2022-05-22 18:51:57,345:INFO:Initializing load_model()
+2022-05-22 18:51:57,346:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:51:59,280:INFO:Initializing load_model()
+2022-05-22 18:51:59,280:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:52:01,194:INFO:Initializing load_model()
+2022-05-22 18:52:01,195:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:52:01,297:INFO:Initializing predict_model()
+2022-05-22 18:52:01,297:INFO:predict_model(estimator=Pipeline(steps=[('dtypes',
+                 DataTypes_Auto_infer(ml_usecase='classification',
+                                      numerical_features=['yearsAtCompany'],
+                                      target='turnover')),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='not_available',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None,
+                                numeric_strategy='mean',
+                                target_variable=None)),
+                ('new_levels1',
+                 New_Catagorical_Levels_in_TestData(rep...
+                ('rem_outliers', 'passthrough'), ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='turnover')),
+                ('fix_perfect', Remove_100(target='turnover')),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough'),
+                ['trained_model',
+                 GradientBoostingClassifier(random_state=2768)]]), probability_threshold=None, encoded_labels=False, drift_report=False, raw_score=False, round=4, verbose=True, ml_usecase=MLUsecase.CLASSIFICATION, display=None, drift_kwargs=None)
+2022-05-22 18:52:01,297:INFO:Checking exceptions
+2022-05-22 18:52:01,298:INFO:Preloading libraries
+2022-05-22 18:58:09,955:INFO:Initializing load_model()
+2022-05-22 18:58:09,956:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:58:11,848:INFO:Initializing load_model()
+2022-05-22 18:58:11,848:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:58:14,905:INFO:Initializing load_model()
+2022-05-22 18:58:14,906:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
+2022-05-22 18:58:15,015:INFO:Initializing predict_model()
+2022-05-22 18:58:15,016:INFO:predict_model(estimator=Pipeline(steps=[('dtypes',
+                 DataTypes_Auto_infer(ml_usecase='classification',
+                                      numerical_features=['yearsAtCompany'],
+                                      target='turnover')),
+                ('imputer',
+                 Simple_Imputer(categorical_strategy='not_available',
+                                fill_value_categorical=None,
+                                fill_value_numerical=None,
+                                numeric_strategy='mean',
+                                target_variable=None)),
+                ('new_levels1',
+                 New_Catagorical_Levels_in_TestData(rep...
+                ('rem_outliers', 'passthrough'), ('cluster_all', 'passthrough'),
+                ('dummy', Dummify(target='turnover')),
+                ('fix_perfect', Remove_100(target='turnover')),
+                ('clean_names', Clean_Colum_Names()),
+                ('feature_select', 'passthrough'), ('fix_multi', 'passthrough'),
+                ('dfs', 'passthrough'), ('pca', 'passthrough'),
+                ['trained_model',
+                 GradientBoostingClassifier(random_state=2768)]]), probability_threshold=None, encoded_labels=False, drift_report=False, raw_score=False, round=4, verbose=True, ml_usecase=MLUsecase.CLASSIFICATION, display=None, drift_kwargs=None)
+2022-05-22 18:58:15,016:INFO:Checking exceptions
+2022-05-22 18:58:15,017:INFO:Preloading libraries
