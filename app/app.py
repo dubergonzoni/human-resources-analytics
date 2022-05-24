@@ -36,15 +36,17 @@ print (dataset.head())
 st.title("Human Resource Analytics")
 
 # subtitle
-st.markdown("This is a Data App to show the Machine Learning solution for the Human Resource Analytics problem.")
+st.markdown("This is a Data App to show the Machine Learning solution for a Human Resource Analytics problem,\
+ predicting the Employee's turnover intention. Please, insert the Employee values and start the classification on the left menu.")
 
 # print the dataset used
-st.dataframe(dataset.head())
+#st.caption("Dataframe, first 5 entries, where the model was trained:")
+#st.dataframe(dataset.head())
 
 # employees groups.
-kmeans_colors = ['green' if c == 0 else 'red' if c == 1 else 'blue' for c in model_cluster.labels_]
+kmeans_colors = ['#91d5f9' if c == 0 else '#955555' if c == 1 else '#91f9a6' for c in model_cluster.labels_]
 
-st.sidebar.subheader("Defina os atributos do empregado para predição de turnover")
+st.sidebar.subheader("Define the feature values for the predition of the Employee's turnover intention")
 
 # mapping user data for each attribute
 satisfaction = st.sidebar.number_input("satisfaction", value=dataset["satisfaction"].mean())
@@ -53,25 +55,45 @@ averageMonthlyHours = st.sidebar.number_input("averageMonthlyHours", value=datas
 yearsAtCompany = st.sidebar.number_input("yearsAtCompany", value=dataset["yearsAtCompany"].mean())
 
 # inserting a botton in the screen
-btn_predict = st.sidebar.button("Realizar Classificação")
+btn_predict = st.sidebar.button("Start the Classification")
 
 # verifying if the botton was added
 if btn_predict:
-    data_teste = pd.DataFrame()
-    data_teste["satisfaction"] = [satisfaction]
-    data_teste["evaluation"] =	[evaluation]    
-    data_teste["averageMonthlyHours"] = [averageMonthlyHours]
-    data_teste["yearsAtCompany"] = [yearsAtCompany]
+    data_test = pd.DataFrame()
+    data_test["satisfaction"] = [satisfaction]
+    data_test["evaluation"] =	[evaluation]    
+    data_test["averageMonthlyHours"] = [averageMonthlyHours]
+    data_test["yearsAtCompany"] = [yearsAtCompany]
     
     #print the data from the test    
-    print(data_teste)
+    print(data_test)
 
     #performs the prediction
-    result = predict_model(model, data=data_teste)
+    result = predict_model(model, data=data_test)
+    intention = int(predict_model(model, data=data_test).iloc[0][4])
+    if intention == 1:
+        label = 'Turnover'
+    if intention == 0:
+        label = 'Retention'
+    prob = (predict_model(model, data=data_test).iloc[0][5] * 100).round(2)
     
+    #st.subheader("Employee's turnover intention:")
+    #st.text(result)
+    st.text('')
+    st.text('')
+    st.text('')
+
+
+    st.subheader('Result:')
     st.write(result)
+    st.caption("Label 1 = Turnover  |  Label 0 = Retention")
+    #font_size = st.slider("Enter a font size", 1, 300, value=30)
+    html_str = f"""<style>p.a {{font: bold {20}px Courier;}}
+    </style><p class="a">The model predicted this Employee with a <span style="color: #999999">{label}</span> intention, with a probalility of {prob}%.</p>"""
+    st.markdown(html_str, unsafe_allow_html=True)
 
-
+    #st.write(result)
+    st.subheader('Cluster Analysis')
 
     fig = plt.figure(figsize=(10, 6))
     plt.scatter( x="satisfaction"
@@ -85,13 +107,22 @@ if btn_predict:
     plt.scatter( x=model_cluster.cluster_centers_[:,0]
                 ,y=model_cluster.cluster_centers_[:,1]
                 ,color="black"
-                ,marker="X",s=100)
+                ,marker="X",s=40)
     
     plt.scatter( x=[satisfaction]
                 ,y=[evaluation]
-                ,color="yellow"
-                ,marker="X",s=300)
+                ,color="grey"
+                ,marker="X",s=500)
 
     plt.title("Employees Groups - Satisfection vs Evaluation.")
     plt.show()
     st.pyplot(fig) 
+
+    employee_X = '<p style="font-family:sans-serif; color:Grey; font-size: 20px;">X = Employee classification.</p>'
+    st.caption(employee_X, unsafe_allow_html=True)
+    group_blue = '<p style="font-family:sans-serif; color: #91f9a6 ; font-size: 15px;">High Evaluation and High Satisfaction</p>'
+    st.caption(group_blue, unsafe_allow_html=True)
+    group_green = '<p style="font-family:sans-serif; color: #91d5f9 ; font-size: 15px;">Low Evaluation and Intermediary Satisfaction</p>'
+    st.caption(group_green, unsafe_allow_html=True)
+    group_red = '<p style="font-family:sans-serif; color:#955555; font-size: 15px;">High Evaluation and Low Satisfaction</p>'
+    st.caption(group_red, unsafe_allow_html=True)
