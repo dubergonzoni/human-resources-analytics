@@ -49,59 +49,59 @@ client = Minio(
 
 def extract():
 
-    #query para consultar os dados.
+    #query to consult the data.
     query = """SELECT hire_date
             FROM employees;"""
 
     df_ = pd.read_sql_query(query,engine)
     
-    #persiste os arquivos na área de Staging.
+    #persist the files in the Staging area.
     df_.to_csv( "/tmp/time_in_company.csv"
                 ,index=False
             )
 
 def transform():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from Staging area.
     df_ = pd.read_csv("/tmp/time_in_company.csv")
 
-    #converte os dados para o formato datetime.
+    #convert data to datetime format.
     df_["hire_date"] = pd.to_datetime(df_["hire_date"])
 
-    #define a data de referencia.
+    #define the reference date.
     date_referencia = date(2021, 1, 1)
 
-    #calcula a diferença de dias entre a data de contratação e a data de referencia.
+    #calculate the diference fo days between the hiring date and the reference date.
     days_diff = []
     for d in df_["hire_date"]:
         diff = date_referencia - d.date()
         days_diff.append(diff.days)
 
-    #converte para o formato inteiro.
+    #convert to integer format.
     nyears = []
     for ndays in days_diff:
         nyears.append(int(math.ceil(ndays / 365)))
     
-    #atribui os dados ao dataframe temporário.
+    #assign the data to the temporary dataframe.
     df_["time_in_company"] = nyears
 
-    #persiste os arquivos na área de Staging.
+    #persit the files to the Staging area.
     df_[["time_in_company"]].to_csv( "/tmp/time_in_company.csv"
                 ,index=False
             )
     
 def load():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from Staging area.
     df_ = pd.read_csv("/tmp/time_in_company.csv")
 
-    #converte os dados para o formato parquet.    
+    #convert data to parquet format.    
     df_.to_parquet(
             "/tmp/time_in_company.parquet"
             ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load the data to the Data Lake.
     client.fput_object(
         "processing",
         "time_in_company.parquet",

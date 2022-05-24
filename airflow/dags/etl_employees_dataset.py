@@ -30,13 +30,13 @@ client = Minio(
     )
 
 def extract():
-    #cria a estrutura para o dataframe.
+    #build the structure for the dataframe.
     df = pd.DataFrame(data=None)
     
-    #busca a lista de objetos no data lake.
+    #search the list of objects in the data lake.
     objects = client.list_objects('processing', recursive=True)
     
-    #faz o download de cada arquivo e concatena com o dataframe vazio.
+    #download each file and concatenate the empty dataframe.
     for obj in objects:
         print("Downloading file...")
         print(obj.bucket_name, obj.object_name.encode('utf-8'))
@@ -49,23 +49,23 @@ def extract():
         df_temp = pd.read_parquet("/tmp/temp_.parquet")
         df = pd.concat([df,df_temp],axis=1)
     
-    #persiste os arquivos na área de Staging.
+    #persist the files to the Staging area.
     df.to_csv("/tmp/employees_dataset.csv"
                ,index=False
             )
 
 def load():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from Staging area.
     df_ = pd.read_csv("/tmp/employees_dataset.csv")
 
-    #converte os dados para o formato parquet.    
+    #convert the data to parquet format.    
     df_.to_parquet(
             "/tmp/employees_dataset.parquet"
             ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #laod the data to the Data Lake.
     client.fput_object(
         "processing",
         "employees_dataset.parquet",

@@ -48,30 +48,30 @@ client = Minio(
 
 def extract():
 
-    #query para consultar os dados.
+    #query to consult the data.
     query = """SELECT Count(PROJECT_ID) as number_projects
             FROM projects_emp
             GROUP BY (emp_id);"""
 
     df_ = pd.read_sql_query(query,engine)
     
-    #persiste os arquivos na área de Staging.
+    #persist the files in the Staging area.
     df_.to_csv( "/tmp/number_projects.csv"
                 ,index=False
             )
 
 def load():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from Staging area.
     df_ = pd.read_csv("/tmp/number_projects.csv")
 
-    #converte os dados para o formato parquet.
+    #convert data to parquet format.
     df_.to_parquet(
         "/tmp/number_projects.parquet"
         ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load the data to the Data Lake.
     client.fput_object(
         "processing",
         "number_projects.parquet",

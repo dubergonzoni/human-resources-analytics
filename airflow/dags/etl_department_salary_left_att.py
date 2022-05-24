@@ -48,7 +48,7 @@ client = Minio(
 
 def extract():
 
-    #query para consultar os dados.
+    #query to consul the data.
     query = """SELECT emp.department as department,sal.salary as salary, emp.left
             FROM employees emp
             INNER JOIN salaries sal
@@ -56,23 +56,23 @@ def extract():
 
     df_ = pd.read_sql_query(query,engine)
     
-    #persiste os arquivos na área de Staging.
+    #persist the files in the Staging area.
     df_.to_csv( "/tmp/department_salary_left.csv"
                 ,index=False
             )
 
 def load():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from Staging area.
     df_ = pd.read_csv("/tmp/department_salary_left.csv")
 
-    #converte os dados para o formato parquet.
+    #convert data to parquet format.
     df_.to_parquet(
         "/tmp/department_salary_left.parquet"
         ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load the data to the Data Lake.
     client.fput_object(
         "processing",
         "department_salary_left.parquet",

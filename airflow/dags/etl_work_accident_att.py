@@ -49,13 +49,13 @@ client = Minio(
 
 def extract():
 
-    #obtendo toda a tabela employees e armazenando como um dataframe.
+    #getting all the employees table and storing as a dataframe.
     df_employees = pd.read_sql_table("employees",engine)
 
-    #obtendo toda a tabela accident e armazenando como um dataframe.
+    #getting all the accident table and storing as a dataframe.
     df_accident = pd.read_sql_table("accident",engine)
     
-    #verificando empregados que sofreram algum acidente.
+    #verifying employees whe had an accident.
     work_accident = []
     for emp in df_employees["emp_no"]:
         if emp in df_accident["emp_no"].to_list():
@@ -63,27 +63,27 @@ def extract():
         else:
             work_accident.append(0)
     
-    #criando a estrutura do Dataframe temporário e atribuindo os dados.
+    #build the structure of the temporary Dataframe and assigning the data.
     df_ = pd.DataFrame(data=None, columns=["work_accident"])
     df_["work_accident"] = work_accident
     
-    #persiste os arquivos na área de Staging.
+    #persit the files to the Staging area.
     df_.to_csv("/tmp/work_accident.csv"
                ,index=False
             )
 
 def load():
 
-    #carrega os dados a partir da área de staging.
+    #load the data from the Staging area.
     df_ = pd.read_csv("/tmp/work_accident.csv")
 
-    #converte os dados para o formato parquet.    
+    #convert the data to parquet format.    
     df_.to_parquet(
             "/tmp/work_accident.parquet"
             ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load the data to the Data Lake.
     client.fput_object(
         "processing",
         "work_accident.parquet",

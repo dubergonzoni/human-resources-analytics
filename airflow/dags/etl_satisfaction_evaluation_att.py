@@ -30,7 +30,7 @@ client = Minio(
 
 def extract():
 
-    #extrai os dados a partir do Data Lake.
+    #extract the data from the Data Lake.
     obj = client.get_object(
                 "landing",
                 "performance-evaluation/employee_performance_evaluation.json",
@@ -38,7 +38,7 @@ def extract():
     data = obj.read()
     df_ = pd.read_json(data,lines=True)
     
-    #persiste os arquivos na área de Staging.
+    #persist the files in the Staging area.
     df_.to_json( "/tmp/employee_performance_evaluation.json"
                 ,orient="records"
                 ,lines=True
@@ -47,19 +47,19 @@ def extract():
 def load():
     from io import BytesIO
 
-    #ler os dados a partir da área de Staging.
+    #read data from the Staging area.
     df_ = pd.read_json( "/tmp/employee_performance_evaluation.json"
                 ,orient="records"
                 ,lines="True"
                 )
 
-    #converte os dados para o formato parquet e pesiste na área de staging.
+    #convert data to parquet format and persit in the Staging area.
     df_[["satisfaction_level","last_evaluation"]].to_parquet(
             "/tmp/satisfaction_evaluation.parquet"
             ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load data to the Data Lake.
     client.fput_object(
         "processing",
         "satisfaction_evaluation.parquet",

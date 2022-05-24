@@ -31,7 +31,7 @@ client = Minio(
 
 def extract():
 
-    #cria a estrutura para o dataframe temporário.
+    #build the structure for the temporary dataframe.
     df_working_hours = pd.DataFrame(data=None, columns=["emp_id","data","hora"])
     
     #list objects
@@ -51,31 +51,31 @@ def extract():
         df_ = pd.read_excel(data)
         df_working_hours = pd.concat([df_working_hours,df_])
         
-    #persiste o dataset na área de Staging.
+    #persist the dataset to the Staging area.
     df_working_hours.to_csv( "/tmp/mean_work_last_3_months.csv"
                 ,index=False
             )
  
 def transform():
 
-    #ler os dados a partir da área de Staging.
+    #read the data from the Staging area.
     df_ = pd.read_csv( "/tmp/mean_work_last_3_months.csv")
     
-    #converte os dados para o formato numeric e datetime.
+    #convert the data to numeric and datetime.
     df_["hora"] = pd.to_numeric(df_["hora"])
     df_["data"] = pd.to_datetime(df_["data"])    
     
-    #filtra apenas os registros dos ultimos 3 meses.
+    #filter only registries from the last 3 months.
     df_last_3_month = df_[(df_['data'] > datetime.datetime(2020,9,30))]
     
-    #calcula as horas de trabalho média nos ultimos meses.
+    #calculate mean working hours in the last 3 months.
     mean_work_last_3_months = df_last_3_month.groupby("emp_id")["hora"].agg("sum")/3
 
-    #cria o dataframe com os dados transformados.
+    #build the dataframe with the transformed.
     mean_work_last_3_months = pd.DataFrame(data=mean_work_last_3_months)
     mean_work_last_3_months.rename(columns={"hora":"mean_work_last_3_months"},inplace=True)
 
-    #persiste os dados transformados na área de staging.
+    #persist the transformed data in the Staging area.
     mean_work_last_3_months.to_csv(
         "/tmp/mean_work_last_3_months.csv"
         ,index=False
@@ -83,16 +83,16 @@ def transform():
 
 def load():
     
-    #carrega os dados a partir da área de staging.
+    #load the data from the Staging area.
     df_ = pd.read_csv("/tmp/mean_work_last_3_months.csv")
 
-    #converte os dados para o formato parquet.
+    #convert the data to parquet.
     df_.to_parquet(
         "/tmp/mean_work_last_3_months.parquet"
         ,index=False
     )
 
-    #carrega os dados para o Data Lake.
+    #load the data to the Data Lake.
     client.fput_object(
         "processing",
         "mean_work_last_3_months.parquet",
