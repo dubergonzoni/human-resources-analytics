@@ -72,9 +72,9 @@ if btn_predict:
     result = predict_model(model, data=data_test)
     intention = int(predict_model(model, data=data_test).iloc[0][4])
     if intention == 1:
-        label = 'Turnover'
+        label = 'leave'
     if intention == 0:
-        label = 'Retention'
+        label = 'stay'
     prob = (predict_model(model, data=data_test).iloc[0][5] * 100).round(2)
     
     #st.subheader("Employee's turnover intention:")
@@ -89,7 +89,7 @@ if btn_predict:
     st.caption("Label 1 = Turnover  |  Label 0 = Retention")
     #font_size = st.slider("Enter a font size", 1, 300, value=30)
     html_str = f"""<style>p.a {{font: bold {20}px Courier;}}
-    </style><p class="a">The model predicted this Employee with a <span style="color: #999999">{label}</span> intention, with a probalility of {prob}%.</p>"""
+    </style><p class="a">The model predicted this Employee to <span style="color: #999999">{label}</span>, with a probability of {prob}%.</p>"""
     st.markdown(html_str, unsafe_allow_html=True)
 
     #st.write(result)
@@ -118,7 +118,7 @@ if btn_predict:
     plt.show()
     st.pyplot(fig) 
 
-    employee_X = '<p style="font-family:sans-serif; color:Grey; font-size: 20px;">X = Employee classification.</p>'
+    employee_X = '<p style="font-family:sans-serif; color:Grey; font-size: 25px;">X = Employee classification.</p>'
     st.caption(employee_X, unsafe_allow_html=True)
     group_blue = '<p style="font-family:sans-serif; color: #91f9a6 ; font-size: 15px;">High Evaluation and High Satisfaction</p>'
     st.caption(group_blue, unsafe_allow_html=True)
