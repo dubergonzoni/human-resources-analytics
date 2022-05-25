@@ -10056,3 +10056,5 @@
                  GradientBoostingClassifier(random_state=2768)]]), probability_threshold=None, encoded_labels=False, drift_report=False, raw_score=False, round=4, verbose=True, ml_usecase=MLUsecase.CLASSIFICATION, display=None, drift_kwargs=None)
 2022-05-24 20:47:33,713:INFO:Checking exceptions
 2022-05-24 20:47:33,713:INFO:Preloading libraries
+2022-05-24 21:11:38,669:INFO:Initializing load_model()
+2022-05-24 21:11:38,670:INFO:load_model(model_name=model, platform=None, authentication=None, verbose=True)
