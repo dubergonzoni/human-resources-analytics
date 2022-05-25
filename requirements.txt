@@ -1,0 +1,7 @@
+joblib==1.1.0
+matplotlib==3.4.2
+minio==7.1.8
+pandas==1.2.5
+pycaret==2.3.10
+SQLAlchemy==1.4.36
+streamlit==1.9.0
