@@ -21,8 +21,7 @@
 *.zip
 
 #Minio
-datalake/.minio.sys
-deploy_heroku_hraturnoverprediction
+datalake/.minio.sys/
 logs.log
 
 # Logs and databases #
