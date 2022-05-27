@@ -13,17 +13,7 @@ client = Minio(
         access_key="minioadmin",
         secret_key="minioadmin",
         secure=False,
-        http_client=urllib3.ProxyManager(
-        "https://PROXYSERVER:PROXYPORT/",
-        timeout=urllib3.Timeout.DEFAULT_TIMEOUT,
-        cert_reqs="CERT_REQUIRED",
-        retries=urllib3.Retry(
-            total=5,
-            backoff_factor=0.2,
-            status_forcelist=[500, 502, 503, 504],
-        ),
-    ),
-)
+    )
 
 #classification model,dataset and cluster.
 client.fget_object("curated","model.pkl","model.pkl")
