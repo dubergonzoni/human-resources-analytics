@@ -1,34 +1,37 @@
 #loading the packages
 import pandas as pd
 import streamlit as st
-from minio import Minio
+#from minio import Minio
 import joblib
 import matplotlib.pyplot as plt
 from pycaret.classification import load_model, predict_model
 
 #loading the files from the Data Lake
-client = Minio(
-        "localhost:9000",
-        access_key="minioadmin",
-        secret_key="minioadmin",
-        secure=False
-    )
+#client = Minio(
+#        "localhost:9000",
+#        access_key="minioadmin",
+#        secret_key="minioadmin",
+#        secure=False
+#    )
 
 #classification model,dataset and cluster.
-client.fget_object("curated","model.pkl","model.pkl")
-client.fget_object("curated","dataset.csv","dataset.csv")
-client.fget_object("curated","cluster.joblib","cluster.joblib")
+#client.fget_object("curated","model.pkl","model.pkl")
+#client.fget_object("curated","dataset.csv","dataset.csv")
+#client.fget_object("curated","cluster.joblib","cluster.joblib")
 
-var_model = "model"
-var_model_cluster = "cluster.joblib"
-var_dataset = "dataset.csv"
+#var_model = "model"
+#var_model_cluster = "cluster.joblib"
+#var_dataset = "dataset.csv"
 
 #loading the trained model.
-model = load_model(var_model)
-model_cluster = joblib.load(var_model_cluster)
+#model = load_model(var_model)
+model = load_model("model.pkl")
+#model_cluster = joblib.load(var_model_cluster)
+model_cluster = joblib.load("cluster.joblib")
 
 #laoding the dataset.
-dataset = pd.read_csv(var_dataset)
+#dataset = pd.read_csv(var_dataset)
+dataset = pd.read_csv("dataset.csv")
 
 print (dataset.head())
 
