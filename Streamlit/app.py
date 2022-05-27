@@ -2,6 +2,7 @@
 import pandas as pd
 import streamlit as st
 from minio import Minio
+import urllib3
 import joblib
 import matplotlib.pyplot as plt
 from pycaret.classification import load_model, predict_model
@@ -11,8 +12,18 @@ client = Minio(
         "localhost:9000",
         access_key="minioadmin",
         secret_key="minioadmin",
-        secure=False
-    )
+        secure=False,
+        http_client=urllib3.ProxyManager(
+        "https://PROXYSERVER:PROXYPORT/",
+        timeout=urllib3.Timeout.DEFAULT_TIMEOUT,
+        cert_reqs="CERT_REQUIRED",
+        retries=urllib3.Retry(
+            total=5,
+            backoff_factor=0.2,
+            status_forcelist=[500, 502, 503, 504],
+        ),
+    ),
+)
 
 #classification model,dataset and cluster.
 client.fget_object("curated","model.pkl","model.pkl")
