@@ -28,7 +28,8 @@
 #Minio
 datalake/.minio.sys/
 logs.log
-
+app/.stremlit
+Streamlit/
 # Logs and databases #
 ######################
 *.log
