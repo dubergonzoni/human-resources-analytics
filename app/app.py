@@ -25,7 +25,7 @@ from pycaret.classification import load_model, predict_model
 
 #loading the trained model.
 #model = load_model(var_model)
-model = load_model("model.pkl")
+model = load_model("model")
 #model_cluster = joblib.load(var_model_cluster)
 model_cluster = joblib.load("cluster.joblib")
 
